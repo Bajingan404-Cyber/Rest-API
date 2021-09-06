@@ -555,20 +555,21 @@ router.get('/download/fb', async (req, res, next) => {
 })
 
 router.get('/stalk/tiktok', async (req, res, next) => {
-    var Apikey = req.query.apikey,
+    var apikey = req.query.apikey,
         username = req.query.username
 
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
+	if(!apikey) return res.json(loghandler.notparam)
     if (!username) return res.json(loghandler.notusername)
 
-
-    TikTokScraper.getUserProfileInfo(username)
-        .then(user => {
-            res.json({
-                status : true,
-                creator : `${creator}`,
-                result : user
+    if(listkey.includes(apikey)){
+    fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${username}?apikey=sayahafiz`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+             	creator: 'Hafidz Abdillah',
+                 code: 200,
+                 result: result.result
             })
         })
         .catch(e => {
@@ -578,34 +579,42 @@ router.get('/stalk/tiktok', async (req, res, next) => {
                  message : "error, mungkin username anda tidak valid"
              })
          })
-   } else {
-res.sendFile(__path + '/views/apikey-not-found.html');
+} else {
+  res.sendFile(invalidKey)
 }
 })
 
-router.get('/stalk/ig', async(req, res, next) => {
-  const apikey = req.query.apikey;
-  const query = req.query.query;
-  if(!apikey) return res.json(loghandler.notparam)
-  if(!query) return res.json(loghandler.notquery)
-  
-  if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://mhankbarbar.herokuapp.com/api/stalk?username=${query}`))
-  .then(response => response.json())
-        .then(hasil => {
-
-        var result = hasil;
+router.get('/stalk/ig', async (req, res, next) => {
+        var apikey = req.query.apikey,
+            username = req.query.username
+            
+	if(!apikey) return res.json(loghandler.notparam)
+    if (!username) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter username"})
+    
+      if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://fdz-app.herokuapp.com/api/stalkig?username=${username}`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
              res.json({
-                 status : true,
-                 creator : `${creator}`,
-                 result
+             	creator: 'Hafidz Abdillah',
+                 code: 200,
+                 message: 'Jangan Ditembak Bang',
+                 result: {
+                 	Username: result.username,
+                 	Name: result.fullname,
+                 	Biodata: result.bio,
+                     Jumlah_Followers: result.followers,
+                     Jumlah_Following: result.following,
+                     Profile_pic: result.picurl
+                     }              
              })
          })
          .catch(e => {
          	res.json(loghandler.error)
 })
 } else {
-res.sendFile(__path + '/views/apikey-not-found.html');
+  res.sendFile(invalidKey)
 }
 })
 
