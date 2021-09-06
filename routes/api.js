@@ -652,8 +652,9 @@ router.get('/stalk/npm', async (req, res, next) => {
         .then(data => {
         var result = data;
              res.json({
-                 status : true,
-                 creator : `${creator}`,
+                 creator: 'Hafidz Abdillah',
+                 code: 200,
+                 message: 'Jangan Ditembak Bang',
                  result
              })
          })
