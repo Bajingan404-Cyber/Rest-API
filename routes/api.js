@@ -473,18 +473,33 @@ router.get('/yt/search', async(req, res, next) => {
 });
 
 router.get('/download/tiktok', async (req, res, next) => {
-    var Apikey = req.query.apikey,
-        url = req.query.url
+        var apikey = req.query.apikey,
+            url = req.query.url
+            
+	if(!apikey) return res.json(loghandler.notparam)
+        if(!url) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter url"})
 
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
-     if (!url) return res.json(loghandler.noturl)
-     Tiktok(url)
-     .then((data) => {
-       res.json(data)
-     })
-    } else {
-res.sendFile(__path + '/views/apikey-not-found.html');
+       if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://fxc7-api.herokuapp.com/api/download/tiktok?apikey=sayahafiz&url=${url}`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 creator: 'Hafidz Abdillah',
+                 code: 200,
+                 message: 'Jangan Ditembak Bang',
+                 result: {
+                 	no_wm: result.result.nowatermark,
+                     wm: result.result.watermark,
+                     tt_audio: result.result.audio
+                }
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+  res.sendFile(invalidKey)
 }
 })
 
