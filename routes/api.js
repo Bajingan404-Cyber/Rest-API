@@ -512,32 +512,32 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/download/fb', async (req, res, next) => {
-
-        var Apikey = req.query.apikey,
-            url = req.query.url
+router.get('/fbdown', async (req, res, next) => {
+        var apikey = req.query.apikey;
+            url = req.query.url;
             
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
+	if(!apikey) return res.json(loghandler.notparam)
     if (!url) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter url"})
-
-       FB(url)
-       .then((data) => {
-         res.json({
-           status: true,
-           code: 200,
-           creator: `${creator}`,
-           title: data.title,
-           desc: data.deskripsi,
-           durasi: data.durasi,
-           thumb: data.thumbnail,
-           result: data.hd
+        
+        if(listkey.includes(apikey)){
+       fetch(encodeURI(`https://api.lolhuman.xyz/api/facebook?apikey=sayahafiz&url=${url}`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+             	creator: 'Hafidz Abdillah',
+                 code: 200,
+                 message: 'Jangan Ditembak Bang',
+                 result: result.result
+             })
          })
-       });
+         .catch(e => {
+         	res.json(loghandler.error)
+})
 } else {
-res.sendFile(__path + '/views/apikey-not-found.html');
+  res.sendFile(invalidKey)
 }
-});
+})
 
 router.get('/stalk/tiktok', async (req, res, next) => {
     var Apikey = req.query.apikey,
