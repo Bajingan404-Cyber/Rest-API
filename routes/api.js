@@ -1654,9 +1654,9 @@ router.get('/music/liriklagu', async (req, res, next) => {
         Lirik(lagu)
         .then((lirik) => {
           res.json({
-            status: true,
+            creator: 'Hafidz Abdillah',
             code: 200,
-            creator: `${creator}`,
+            message: 'Jangan Ditembak Bang',
             result: lirik.data
           })
         });
