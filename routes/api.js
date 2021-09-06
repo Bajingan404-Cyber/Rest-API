@@ -76,6 +76,8 @@ var {
 
 var tebakGambar = require('./../lib/utils/tebakGambar');
 
+var invalidKey = __path + '/views/apikey-not-found.html'
+
 var cookie = process.env.COOCKIE
 /*
 * @Pesan Error
