@@ -512,7 +512,7 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/fbdown', async (req, res, next) => {
+router.get('/download/fb', async (req, res, next) => {
         var apikey = req.query.apikey;
             url = req.query.url;
             
