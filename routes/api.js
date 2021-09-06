@@ -368,9 +368,9 @@ router.get('/download/ytmp3', async(req, res, next) => {
   ytDonlodMp3(url)
     .then((result) => {
       res.json({
-        status: true,
+        creator: 'Hafidz Abdillah',
         code: 200,
-        creator: `${creator}`,
+        message: 'Jangan Ditembak Bang',
         result
       })
     })
@@ -393,9 +393,9 @@ router.get('/download/ytmp4', async(req, res, next) => {
   ytDonlodMp4(url)
     .then((result) => {
       res.json({
-        status: true,
-        code: 200,
-        creator: `${creator}`,
+       creator: 'Hafidz Abdillah',
+       code: 200,
+       message: 'Jangan Ditembak Bang',
         result
       })
     })
