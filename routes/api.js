@@ -573,7 +573,7 @@ router.get('/stalk/tiktok', async (req, res, next) => {
                  	user_pic: result.user.avatarLarger,
                      username: result.user.uniqueId,
                      name: resutl.user.nickname,
-                     bio_user: result.result.signature,
+                     bio_user: result.user.signature,
                      followers_user: result.stats.followerCount,
                      following_user: result.stats.followingCount,
                      total_likes: result.stats.heartCount,
