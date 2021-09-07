@@ -570,14 +570,14 @@ router.get('/stalk/tiktok', async (req, res, next) => {
              	creator: 'Hafidz Abdillah',
                  code: 200,
                  result: {
-                 	user_pic: result.result.user_picture,
-                     username: result.result.username,
-                     name: resutl.result.nickname,
-                     bio_user: result.result.bio,
-                     followers_user: result.result.followers,
-                     following_user: result.result.followings,
-                     total_likes: result.result.likes,
-                     post_total: result.result.video
+                 	user_pic: result.user.avatarLarger,
+                     username: result.user.uniqueId,
+                     name: resutl.user.nickname,
+                     bio_user: result.result.signature,
+                     followers_user: result.stats.followerCount,
+                     following_user: result.stats.followingCount,
+                     total_likes: result.stats.heartCount,
+                     post_total: result.stats.videoCount
                 }
             })
         })
