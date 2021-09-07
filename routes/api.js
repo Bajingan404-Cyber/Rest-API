@@ -8,7 +8,7 @@ var zahirr = db.get("zahirr");
 	console.log('')  
 }
  
-var creator = "xfar"
+var creator = "Hafidz Abdillah"
 
 var secure = require('ssl-express-www');
 var cors = require('cors');
