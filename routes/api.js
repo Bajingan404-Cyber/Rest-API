@@ -562,14 +562,23 @@ router.get('/stalk/tiktok', async (req, res, next) => {
     if (!username) return res.json(loghandler.notusername)
 
     if(listkey.includes(apikey)){
-    fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${username}?apikey=sayahafiz`))
+    fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${username]?apikey=sayahafiz`))
         .then(response => response.json())
         .then(data => {
         var result = data;
              res.json({
              	creator: 'Hafidz Abdillah',
                  code: 200,
-                 result: result.result
+                 result: {
+                 	user_pic: result.result.user_picture
+                     username: result.result.username
+                     name: resutl.result.nickname
+                     bio_user: result.result.bio
+                     followers_user: result.result.followers
+                     following_user: result.result.followings
+                     total_likes: result.result.likes
+                     post_total: result.result.video
+                }
             })
         })
         .catch(e => {
